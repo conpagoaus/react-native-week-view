@@ -1,22 +1,7 @@
-import { Dimensions } from 'react-native';
 import moment from 'moment';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
-export const CONTENT_OFFSET = 16;
-export const CONTAINER_HEIGHT = SCREEN_HEIGHT - 60;
-export const CONTAINER_WIDTH = SCREEN_WIDTH - 60;
 export const DATE_STR_FORMAT = 'YYYY-MM-DD';
 export const availableNumberOfDays = [1, 3, 5, 7];
-
-export const minutesToYDimension = (hoursInDisplay, minutes) => {
-  const minutesInDisplay = 60 * hoursInDisplay;
-  return (minutes * CONTAINER_HEIGHT) / minutesInDisplay;
-};
-
-export const getTimeLabelHeight = (hoursInDisplay, minutesStep) => {
-  const timeLabelsInDisplay = Math.ceil((hoursInDisplay * 60) / minutesStep);
-  return CONTAINER_HEIGHT / timeLabelsInDisplay;
-};
 
 export const getFormattedDate = (date, format) => {
   return moment(date).format(format);
@@ -34,6 +19,17 @@ export const addLocale = (locale, obj) => {
 
 export const getCurrentMonth = (date) => {
   return moment(date).format('MMMM Y');
+};
+
+/**
+ * Get the amount of minutes in a day of a date.
+ * @param {Date} date
+ * @returns amount of minutes in the day.
+ */
+export const minutesInDay = (date) => {
+  const dateObj = moment(date);
+  if (!dateObj || !dateObj.isValid()) return 0;
+  return dateObj.hours() * 60 + dateObj.minutes();
 };
 
 export const calculateDaysArray = (date, numberOfDays, rightToLeft) => {

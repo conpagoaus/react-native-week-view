@@ -1,7 +1,10 @@
-
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "airbnb/hooks", "plugin:prettier/recommended"],
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:prettier/recommended"
+  ],
   "env": {
     "browser": true,
     "node": true,
@@ -24,8 +27,17 @@
     "react/sort-comp": 0,
     "react-hooks/exhaustive-deps": "warn"
   },
+  "ignorePatterns": [
+    "example/**/*.js"
+  ],
   "plugins": [
     "react",
     "jest"
+  ],
+  "overrides": [
+    {
+      "files": [ "**/*.ts", "**/*.tsx" ],
+      "extends": [ "plugin:@typescript-eslint/recommended" ]
+    }
   ]
 }
